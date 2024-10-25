@@ -1,0 +1,127 @@
+
+<app-title title="Defer Triggers"/>
+
+
+<section>
+
+  <h1 class="italic text-xl">Interacciones</h1>
+  <hr class="my-2">
+
+ <!-- Esto va a funcionar cuando se de click -->
+  @defer (on interaction){
+  <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+    <span>
+      <!-- El On Interaction es donde esta ngContent-->
+      On Interaction
+    </span>
+  </app-heavy-loaders-fast>
+  } @placeholder{
+    <div class="w-full h-20 bg-amber-200">
+      Click aqui
+    </div>
+  }
+
+
+</section>
+
+<section>
+  <hr class="my-2">
+  <!-- #greeting es referencia local al boton el cual mas abajo se le pasa al defer para que cuando se toque el boton es -->
+  <button #greeting class="p-2 bg-blue-500 hover:bg-blue-700 transition-all rounded text-white my-2">
+    Click Me!
+  </button>
+
+ <!-- Esto va a funcionar cuando se de click -->
+  @defer (on interaction(greeting) ){
+  <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+    <span>
+      <!-- El On Interaction es donde esta ngContent-->
+      On Interaction with Button
+    </span>
+  </app-heavy-loaders-fast>
+  } @placeholder{
+    <div class="w-full h-20 bg-red-200">
+      Aprieta el boton
+    </div>
+  }
+
+
+</section>
+
+<section>
+  <hr class="my-2">
+
+
+ <!-- Esto va a funcionar cuando pase por encima del boton -->
+  @defer (on hover(greeting)){
+  <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+    <span>
+      <!-- El On Interaction es donde esta ngContent-->
+      On hover in button
+    </span>
+  </app-heavy-loaders-fast>
+  } @placeholder{
+    <div class="w-full h-20 bg-red-200">
+      Pasa el boton por encima del boton
+    </div>
+  }
+
+
+</section>
+
+<section>
+  <hr class="my-2">
+
+ <!-- Esto va a funcionar en cuanto se construya el componente defer option -->
+  @defer (on immediate){
+  <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+    <span>
+      <!-- El On Interaction es donde esta ngContent-->
+      On Immediate
+    </span>
+  </app-heavy-loaders-fast>
+  } @placeholder{
+    <div class="w-full h-20 bg-red-200">
+      WAOS
+    </div>
+  }
+
+</section>
+
+<section>
+  <hr class="my-2">
+
+ <!-- Esto va a funcionar en cuanto termine le tiempo del timer -->
+  @defer (on timer(3000ms)){
+  <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+    <span>
+      <!-- El On Interaction es donde esta ngContent-->
+      On Timer
+    </span>
+  </app-heavy-loaders-fast>
+  } @placeholder{
+    <div class="w-full h-20 bg-red-200">
+      Espera
+    </div>
+  }
+
+</section>
+
+<section>
+  <hr class="my-2">
+
+ <!-- Combinacion de on hover -->
+  @defer (on hover; prefetch on idle){
+  <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+    <span>
+      <!-- El On Interaction es donde esta ngContent-->
+      On hove with Idle
+    </span>
+  </app-heavy-loaders-fast>
+  } @placeholder{
+    <div class="w-full h-20 bg-red-200">
+      Aprieta el boton
+    </div>
+  }
+
+</section>

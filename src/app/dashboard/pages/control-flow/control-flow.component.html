@@ -1,0 +1,99 @@
+
+<app-title title="Control Flow"></app-title>
+<!-- Ahi tenemos dos atributos en el caso de withShadow si el atributo esta puesto sale verdadero en el la pagina
+ si no esta presente sale false  -->
+
+<section class="grid grid-cols-1 md:grid-cols-2 gap-3">
+ <!-- @if y @else -->
+    <div class="bg-white rounded shadow p-10">
+        <!-- La lo que se muestra es lo que devuelve la funcion showContent() -->
+        <h2 class="text-2xl font-bold mb-5">if: {{ showContent() }}</h2>
+        <!-- ToggleContent() es una funcion para el funcionamento del boton-->
+        <button class="p-2 bg-blue-500 rounded text-white hover:bg-blue-950 "
+        (click)="toggleContent()">
+            Presioname
+        </button>
+        <!-- Flujos de Control @if, @else -->
+        @if ( showContent() ) {
+            <p>Hola Mundo</p>
+        }@else{
+            <p>*****</p>
+        }
+  
+    </div>
+    <!-- @switch -->
+    <div class="bg-white rounded shadow p-10">
+        <!-- La lo que se muestra es lo que devuelve la funcion grade() -->
+        <h2 class="text-3xl ">{{grade()}}</h2>
+        @switch (grade()) {
+          @case ('A'){
+            <p>Arriba de 90</p>
+          }
+          @case ('B'){
+            <p>Arriba de 80</p>
+          }
+          @default {
+            <p>Reprobado</p>
+          }
+        }
+        <!-- toggleGrade() es una funcion para el funcionamento del boton-->
+        <button class="p-2 bg-blue-500 rounded text-white hover:bg-blue-950"
+        (click)="toggleGrade()">
+             Push ME
+        </button>
+     </div>
+
+     <!-- @for -->
+     <div class="bg-white rounded shadow p-10">
+
+      <ul>
+        @for (framework of frameworks(); track $index) {
+            <li>{{framework}}</li>
+        }
+      </ul>
+
+     </div>
+
+     <div class="bg-white rounded shadow p-10">
+      <!-- Para poner un mensaje cuando el arreglo esta vacio usamos @empty -->
+      <ul>
+        @for (framework of frameworks2(); track $index) {
+            <li>{{framework}}</li>
+        } @empty {
+          <li>No hay frameworks agregados</li>
+        }
+      </ul>
+      <!-- el track de $index es por lo indice del arreglo -->
+      <!-- el track por el item o objeto ejemplo framework pero si hay dos iguales da error -->
+       <!-- Tambien podemos agregarlo una variable de control para que lo maneje -->
+
+     </div>
+
+     <div class="bg-white rounded shadow p-10">
+      <!-- Ejemplo de variable de control -->
+      <!-- $count Numero total de elementos del listado  -->
+
+      <!-- Para manejar estilo de las elemento podemos usar y tambien para comprobar cosas-->
+      <!-- Tambien podemos con $first que es un valor booleano que determina si es el primer elemento del estado -->
+      <!-- $last que es un valor booleano que determina si es el ultimo elemento del estado -->
+      <!-- $even Determina si el índice actual es par -->
+      <!-- $odd Determina si el índice es impar-->
+      <ul>
+        @for (framework of frameworks(); track framework;
+        let a = $index, first = $first, last = $last, even = $even, odd = $odd, count = $count) {
+            <li [class]="{
+              'bg-red-500': even && !first && !last,
+              'bg-pink-500': odd && !first && !last,
+              'bg-orange-500': first || last,
+            }">
+            <!-- se pondra rojo si es par y no es el primero o el ultimo -->
+            <!-- se pondra rosa si es impar y no es el primero o el ultimo -->
+            <!-- se pondra naranja si es el primero o el ultimo -->
+              {{a}}/{{count}}-{{framework}}
+            </li>
+        }
+      </ul>
+
+     </div>
+
+</section>

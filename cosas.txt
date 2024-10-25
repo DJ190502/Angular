@@ -1,0 +1,31 @@
+Si quieres crear alias los hace en el archivo tsconfig.json
+
+
+Para poner transiciones con solo ir a app.config.ts y poner dentro providerRouter withViewTransitions()
+
+Dentro del withViewTransitions({se ponen funciones y caracteristicas para modificar las animaciones})
+
+Algunas propiedades son
+skipInitialTransition => el cual te permite que la página cargue sin la animación inicial o sea que el componente primero que esta no presente una animacion. true para activarlo, false para desactivarlo
+
+onViewTranstitionCreated(transtitionInfo)
+console.log(transitionInfo) => te permite saber la informacionde la ruta cada vez que vaya a una vista. Dara informacion de la transicion de donde viene a donde va
+
+
+Para resolver el problema del injector tenemos que ir a app.config.ts y agregar
+
+Para resolver el problema del CORS usamos un proxy por ejemplo el siguiente
+{
+    "/api": {
+      "target": "http://reqres.in",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }
+
+EN ello creamos un json llamado proxy.conf.json que va a incluir todo eso arriba 
+
+Despues en package.json o sea la configuracion del projecto en el start ponemos
+
+"start": "ng serve --proxy-config proxy.conf.json",
